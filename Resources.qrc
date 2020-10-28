@@ -1,9 +1,0 @@
-<RCC>
-    <qresource prefix="/res">
-        <file>img/alarm.png</file>
-        <file>img/exit.png</file>
-        <file>img/timer.png</file>
-        <file>alarmsound.wav</file>
-        <file>img/donot.png</file>
-    </qresource>
-</RCC>
