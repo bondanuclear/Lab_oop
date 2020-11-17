@@ -16,6 +16,7 @@ MainWindow::MainWindow(QWidget *parent):
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+        this->setWindowTitle("Timer");
 player = new QMediaPlayer(this);
 }
 void MainWindow::on_pushButton_clicked()
@@ -92,7 +93,11 @@ void MainWindow::on_pushButton_4_clicked()
     windoww->show();
 
 }
-
+void MainWindow::on_pushButton_5_clicked()
+{
+QString name = ui->lineEdit->text();
+this->setWindowTitle(name);
+}
 
 
 
