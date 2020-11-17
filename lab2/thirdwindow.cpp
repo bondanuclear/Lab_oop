@@ -15,7 +15,8 @@ ThirdWindow::ThirdWindow(QWidget *parent) :
     connect(player,&QMediaPlayer::positionChanged,this,&ThirdWindow::on_positionChanged);
     connect(player,&QMediaPlayer::durationChanged,this,&ThirdWindow::on_durationChanged);
 
-player->setMedia(QUrl::fromLocalFile("/Users/lanbo/Documents/timer_test/alarmsound.wav"));
+    player->setMedia(QUrl::fromLocalFile("/Users/lanbo/test/Lab_oop/timer_test/alarmsound.wav"));
+
 player->play();
 
 }
