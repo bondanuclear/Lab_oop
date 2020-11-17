@@ -6,6 +6,7 @@ ThirdWindow::ThirdWindow(QWidget *parent) :
     ui(new Ui::ThirdWindow)
 {
     ui->setupUi(this);
+    this->setWindowTitle("Alarm clock");
     tmr2 = new QTimer(this);
     tmr2->setInterval(1000);
     connect(tmr2, SIGNAL(timeout()), this, SLOT(updateTime2()));
@@ -51,4 +52,16 @@ void ThirdWindow::on_durationChanged(qint64 position)
 void ThirdWindow::on_pushButton_clicked()
 {
  player->stop();
+ tmr2 = new QTimer(this);
+ tmr2->setInterval(1000);
+ connect(tmr2, SIGNAL(timeout()), this, SLOT(updateTime2()));
+ tmr2->start();
+ QTimer::singleShot(10000, this, SLOT(foo1()));
+}
+
+
+void ThirdWindow::foo1()
+{
+    player->setMedia(QUrl::fromLocalFile("/Users/lanbo/test/Lab_oop/timer_test/alarmsound.wav"));
+    player->play();
 }
