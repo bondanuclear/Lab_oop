@@ -43,7 +43,7 @@ void MainWindow::updateTime()
 void MainWindow::foo()
 {
 ui->statusbar->showMessage("Done");
-//QSoundEffect::setVolume();
+
 
 QApplication::beep();
 tmr->stop();
