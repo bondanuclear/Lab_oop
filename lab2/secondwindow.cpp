@@ -9,6 +9,7 @@ SecondWindow::SecondWindow(QWidget *parent) :
     ui(new Ui::SecondWindow)
 {
     ui->setupUi(this);
+    this->setWindowTitle("Setting the alarm clock");
 }
 
 SecondWindow::~SecondWindow()
