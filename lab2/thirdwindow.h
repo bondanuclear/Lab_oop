@@ -19,6 +19,9 @@ class ThirdWindow : public QDialog
 public:
     explicit ThirdWindow(QWidget *parent = nullptr);
     ~ThirdWindow();
+    public slots:
+    void foo1();
+
 private slots:
      void updateTime2();
      void on_pushButton_2_clicked();
