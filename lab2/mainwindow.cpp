@@ -26,7 +26,7 @@ void MainWindow::on_pushButton_clicked()
     tmr->setInterval(1000);
     connect(tmr, SIGNAL(timeout()), this, SLOT(updateTime()));
     tmr->start();
-QTimer::singleShot(time, this, SLOT(foo()));
+    QTimer::singleShot(time, this, SLOT(foo()));
 
 
 }
