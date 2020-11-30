@@ -5,27 +5,27 @@
 #include <opencv2/objdetect/objdetect.hpp>
 #include <opencv2/face.hpp>
 #include "drawLandmarks.hpp"
-
+#include <chrono>
+#include <thread>
 using namespace std;
 using namespace cv;
 using namespace cv::face;
-
-int main(int argc, char** argv)
+void face_id()
 {
 	// розпізнавач обличчя
 	CascadeClassifier faceDetector("haarcascade_frontalface_alt2.xml");
-	
+
 	Ptr<Facemark> facemark = FacemarkLBF::create();
 	facemark->loadModel("lbfmodel.yaml");
-	VideoCapture cam(0); 
+	VideoCapture cam(0);
 	Mat frame, gray;
 	while (cam.read(frame))
 	{
 		// знаходження обличчя
 		vector<Rect> faces;
 		cvtColor(frame, gray, COLOR_BGR2GRAY);
-		faceDetector.detectMultiScale(gray,faces);
-	  // вектор точок
+		faceDetector.detectMultiScale(gray, faces);
+		// вектор точок
 		vector< vector<Point2f> > landmarks;
 		bool check = facemark->fit(frame, faces, landmarks);
 		if (check)
@@ -45,23 +45,23 @@ int main(int argc, char** argv)
 				float dxx = XR - X0; float dyx = -(YR - Y0);
 				float dxy = -(landmarks[i][33].x - X0);
 				float dyy = landmarks[i][33].y - Y0;
-				float dxz = landmarks[i][27].x - X0; 
+				float dxz = landmarks[i][27].x - X0;
 				float dyz = -(landmarks[i][27].y - Y0);
-			/////
-				float Kx = dyx / dxx; 
-				float Ky = dyy / dxy; 
+				/////
+				float Kx = dyx / dxx;
+				float Ky = dyy / dxy;
 				float Kz = dyz / dxz;
 				/////////////////////////////// Відстань між точками за допомогою теореми Піфагора
 				float Lx = sqrt(dxx * dxx + dyx * dyx);
 				float Ly = sqrt(dxy * dxy + dyy * dyy);
 				float Lz = sqrt(dxz * dxz + dyz * dyz);
 				// координати
-				float X1 = (landmarks[i][3].x); 
+				float X1 = (landmarks[i][3].x);
 				float Y1 = (landmarks[i][3].y);
 				float X2 = (landmarks[i][13].x);
 				float Y2 = (landmarks[i][13].y);
 
-			  ////////////
+				////////////
 				float DX1 = (X2 - X1);
 				float DY1 = (Y2 - Y1);
 
@@ -71,17 +71,17 @@ int main(int argc, char** argv)
 				Xmid = Xmid - X0; Ymid = -(Ymid - Y0); // вкс
 				// через Xmid i Ymid проводимо пряму, паралельну проекції вісі z до перетину з віссю y
 				// координати перетину цих прямих
-				float Xint = (Ymid - Kz * Xmid) / (Ky - Kz); 
-				float Yint = Ky * Xint; 
+				float Xint = (Ymid - Kz * Xmid) / (Ky - Kz);
+				float Yint = Ky * Xint;
 				///
-				Xmid = Xmid + X0; Ymid = -(Ymid - Y0); 
+				Xmid = Xmid + X0; Ymid = -(Ymid - Y0);
 				Xint = Xint + X0; Yint = -(Yint - Y0);
 
 
 				// відрізки
 				line(frame, Point(X1, Y1), Point(Xmid, Ymid), Scalar(0, 255, 255), 2); // X
-				line(frame, Point(X0, Y0), Point(Xint, Yint), Scalar(0, 0, 255), 2); // Y
-				line(frame, Point(Xmid, Ymid), Point(Xint, Yint), Scalar(0, 255, 0), 2); // Z
+				line(frame, Point(X0, Y0), Point(Xint, Yint), Scalar(255, 0, 255), 2); // Y
+				line(frame, Point(Xmid, Ymid), Point(Xint, Yint), Scalar(255, 255, 0), 2); // Z
 
 				float x1 = 0.5 * sqrt(DX1 * DX1 + DY1 * DY1) / Lx; // нормалізована координата х1 
 				float x2 = -x1; //нормалізована координата х2 (для симетричної точки)
@@ -100,22 +100,37 @@ int main(int argc, char** argv)
 				if ((x1 - 2 < 0.1) && (y1 - 1 < 0.1))
 				{
 					putText(frame, "Bondarenko", Point(landmarks[i][27].x, landmarks[i][27].y), 1, 2, Scalar(0, 0, 255), 2);
+					//this_thread::sleep_for(chrono::milliseconds(3000));
+					//break;
 				}
-				else  
+				/*else
 					if ((x1 - 2.2 < 0.1) && (y1 - 1.2 < 0.1))
 					{
 						putText(frame, "Person1", Point(landmarks[i][27].x, landmarks[i][27].y), 1, 2, Scalar(0, 0, 255), 2);
-					}
-				else putText(frame, "Can't recognize", Point(landmarks[i][27].x, landmarks[i][27].y), 1, 2, Scalar(0, 0, 255), 2);
+					}*/
+					else putText(frame, "Can't recognize", Point(landmarks[i][27].x, landmarks[i][27].y), 1, 2, Scalar(0, 0, 255), 2);
 			}
 		}
 
 		// вивести на екран
 		imshow("Facial Landmark Detection", frame);
 
-		
-		if (waitKey(1) == 27) break; // esc для виходу
+		// esc для виходу
+		if (waitKey(1) == 27) break; 
 
 	}
+}
+int main(int argc, char** argv)
+{
+	cout << "Orders: " << endl;
+	int choice;
+	cin >> choice;
+	switch (choice)
+	{
+	case 1: face_id();
+
+
+	}
+	
 	return 0;
 }
