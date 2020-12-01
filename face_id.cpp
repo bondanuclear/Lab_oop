@@ -10,7 +10,7 @@
 using namespace std;
 using namespace cv;
 using namespace cv::face;
-void face_id()
+void face_id_3d()
 {
 	// розпізнавач обличчя
 	CascadeClassifier faceDetector("haarcascade_frontalface_alt2.xml");
@@ -120,17 +120,146 @@ void face_id()
 
 	}
 }
-int main(int argc, char** argv)
+void face_id_2d()
 {
-	cout << "Orders: " << endl;
-	int choice;
-	cin >> choice;
-	switch (choice)
+	
+	CascadeClassifier faceDetector("haarcascade_frontalface_alt2.xml");
+	Ptr<Facemark> facemark = FacemarkLBF::create();
+	facemark->loadModel("lbfmodel.yaml");
+	VideoCapture cam(0);
+	// зберегти frame та grayscale
+	Mat frame, gray;
+	while (cam.read(frame))
 	{
-	case 1: face_id();
+		
+		vector<Rect> faces;
+		// перетворити frame до grayscale image
+		// бо faceDetector вимагає grayscale image.
+		cvtColor(frame, gray, COLOR_BGR2GRAY);
+		// розппізнавач обличчя
+		faceDetector.detectMultiScale(gray, faces);
+		 
+		vector< vector<Point2f> > landmarks;
+		bool check = facemark->fit(frame, faces, landmarks);
 
+		if (check)
+		{
+			
+			for (size_t i = 0; i < faces.size(); i++)
+			{
+				cv::rectangle(frame, faces[i], Scalar(0, 255, 0), 3);
+			}
+
+			for (int i = 0; i < landmarks.size(); i++)
+			{
+				
+				drawLandmarks(frame, landmarks[i]);
+
+				/*for (size_t j = 0; j < landmarks[i].size(); j++) {
+					circle(frame, Point(landmarks[i][j].x, landmarks[i][j].y), 1, Scalar(255, 0, 0), 2);
+				}*/
+				// намалювати лінію від переносиці до підборіддя
+				line(frame, Point(landmarks[i][27].x, landmarks[i][27].y), Point(landmarks[i][8].x, landmarks[i][8].y), Scalar(0, 0, 255), 2);
+				// координати середини правого і лівого ока
+				float XL = (landmarks[i][45].x + landmarks[i][42].x) / 2;
+
+				float YL = (landmarks[i][45].y + landmarks[i][42].y) / 2;
+
+				float XR = (landmarks[i][39].x + landmarks[i][36].x) / 2;
+
+				float YR = (landmarks[i][39].y + landmarks[i][36].y) / 2;
+				//////////////////////////////////////////////////
+				// Намалювати лінію від середини лівого до середини правого очей
+				line(frame, Point(XL, YL), Point(XR, YR), Scalar(0, 0, 255), 2);
+
+				// Відстань між середніми точками очей по Х і Y
+				float DX = XR - XL;
+
+				float DY = YR - YL;
+				// за теоремою Піфагора вираховуємо  відстань між серединами очей
+				float L = sqrt(DX * DX + DY * DY);
+				// Точка переносиці по х та у
+				float X1 = (landmarks[i][27].x);
+
+				float Y1 = (landmarks[i][27].y);
+				// Точка підборіддя по х та у
+				float X2 = (landmarks[i][8].x);
+
+				float Y2 = (landmarks[i][8].y);
+				///////////
+					// 
+				float DX1 = abs(X1 - X2);
+
+				float DY1 = abs(Y1 - Y2);
+				// відстань від переносиці до підборіддя
+				float L1 = sqrt(DX1 * DX1 + DY1 * DY1);
+
+				float X0 = (XL + XR) / 2;
+
+				float Y0 = (YL + YR) / 2;
+				// тригонометричні функції повороту
+
+				float sin_AL = DY / L;
+
+				float cos_AL = DX / L;
+				/////////////
+				// перехід від системи координат у вікні до координатами в СК користувача
+				// точка переносиці
+				float X_User_0 = (landmarks[i][27].x - X0) / L;
+
+				float Y_User_0 = -(landmarks[i][27].y - Y0) / L;
+
+				float X_User27 = X_User_0 * cos_AL - Y_User_0 * sin_AL;
+
+				float Y_User27 = X_User_0 * sin_AL + Y_User_0 * cos_AL;
+				// в точці кінчика носа
+				X_User_0 = (landmarks[i][30].x - X0) / L;
+				Y_User_0 = -(landmarks[i][30].y - Y0) / L;
+				float X_User30 = X_User_0 * cos_AL - Y_User_0 * sin_AL;
+				float Y_User30 = X_User_0 * sin_AL + Y_User_0 * cos_AL;
+
+				if (abs(X_User27 - X_User30) <= 0.1)
+				{
+					putText(frame, std::to_string(abs(L1 / L)), Point(landmarks[i][30].x, landmarks[i][30].y), 1, 2, Scalar(0, 0, 255), 2);
+					//putText(frame, std::to_string(abs(L1)), Point(landmarks[i][8].x, landmarks[i][8].y), 1, 2, Scalar(0, 255, 0), 2);
+					//putText(frame, std::to_string(abs(L)), Point(landmarks[i][13].x, landmarks[i][13].y), 1, 2, Scalar(255, 0, 0), 2);
+					if (abs((L1 / L) - 1.8) < 0.1)
+					{
+						putText(frame, "Bondarenko", Point(landmarks[i][27].x, landmarks[i][27].y), 1, 2, Scalar(0, 0, 255), 2);
+					}
+
+					/*if (abs((L1 / L) - 2.0) < 0.1)
+					{
+						putText(frame, "Person1", Point(landmarks[i][27].x, landmarks[i][27].y), 1, 2, Scalar(0, 0, 255), 2);
+					}*/
+
+
+				}
+				else
+					putText(frame, "Can't recognize", Point(landmarks[i][27].x, landmarks[i][27].y), 1, 2, Scalar(0, 0, 255), 2);
+			}
+		}
+
+		// Display results 
+		imshow("Facial Landmark Detection", frame);
+
+		// Exit loop if ESC is pressed
+		if (waitKey(1) == 27) break;
 
 	}
+}
+int main(int argc, char** argv)
+{
+	
+		cout << "Orders: " << endl;
+		int choice;
+		cin >> choice;
+		switch (choice)
+		{
+		case 1: face_id_3d();
+		case 2: face_id_2d();
+		default: cout << "Choose again" << endl;
+		}
 	
 	return 0;
 }
