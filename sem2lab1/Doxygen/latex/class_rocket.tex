@@ -1,0 +1,188 @@
+\hypertarget{class_rocket}{}\doxysection{Rocket Class Reference}
+\label{class_rocket}\index{Rocket@{Rocket}}
+
+
+The main {\ttfamily \mbox{\hyperlink{class_rocket}{Rocket}}} class. It is mostly dedicated to allowing you drive a rocket. 
+\begin{DoxyItemize}
+\item Respond\+To\+Rotate\+Input Rotates the rocket  
+\item Respond\+To\+Thrust\+Input Accelerates the rocket  
+\item Apply\+Thrust Applies thrust to the rocket  
+\item On\+Collision\+Enter Tracking the collision  
+\item Start\+Next\+Level\+Sequence Starts next level sequence  
+\item Start\+Death\+Sequence Starts the death sequence  
+\item Next\+Level\+Sound/\+Death\+Sound  Sound of getting to the next level and destroying the rocket respectively  
+\item Load\+Next\+Level/\+Load\+First\+Level Loads level  
+\end{DoxyItemize} 
+
+
+Inheritance diagram for Rocket\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_rocket}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_rocket_aba0de43437fc548d36c6782e7bc7f668}{Respond\+To\+Rotate\+Input}} ()
+\begin{DoxyCompactList}\small\item\em Determines the button for rotating the rocket and calculating the speed of rotation. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_rocket_a769211265142420d64b503b55b8c96be}{Respond\+To\+Thrust\+Input}} ()
+\begin{DoxyCompactList}\small\item\em Responsible for acceleration of the rocket. Determines the button(\char`\"{}space\char`\"{}) for thrusting \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_rocket_ad649334ed7f7174780b4b14ae0169639}{Apply\+Thrust}} ()
+\begin{DoxyCompactList}\small\item\em Regulating accelerating force and thrusting sound. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_rocket_a38e633eea7042b52d62fb1b6a0bc6fcd}{On\+Collision\+Enter}} (Collision collision)
+\begin{DoxyCompactList}\small\item\em Tracks the incoming collision. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_rocket_a8a289851a2baaa62e08321f845ab3b8b}{Start\+Nex\+Level\+Sequence}} ()
+\begin{DoxyCompactList}\small\item\em Begins the loading of the next level. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_rocket_aa81a7271065e82ebca87d6596bf57cb2}{Start\+Death\+Sequence}} ()
+\begin{DoxyCompactList}\small\item\em Disables moves. Creates an explosion. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_rocket_a783bac81d6acc5dd7d162cdf6af790fb}{Next\+Level\+Sound}} ()
+\begin{DoxyCompactList}\small\item\em Creates the sound after hitting the landing pad. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_rocket_a1fb38d84f7ff5f687551521cc8ce5f69}{Death\+Sound}} ()
+\begin{DoxyCompactList}\small\item\em Creates the sound after hitting an obstacle \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_rocket_a842df217d8ac420ed7943de692160f4b}{Load\+First\+Level}} ()
+\begin{DoxyCompactList}\small\item\em Loads first level. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_rocket_af7aaabc53d26711b09b34a5e7e0d3c79}{Load\+Next\+Level}} ()
+\begin{DoxyCompactList}\small\item\em Loads next level. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The main {\ttfamily \mbox{\hyperlink{class_rocket}{Rocket}}} class. It is mostly dedicated to allowing you drive a rocket. 
+\begin{DoxyItemize}
+\item Respond\+To\+Rotate\+Input Rotates the rocket  
+\item Respond\+To\+Thrust\+Input Accelerates the rocket  
+\item Apply\+Thrust Applies thrust to the rocket  
+\item On\+Collision\+Enter Tracking the collision  
+\item Start\+Next\+Level\+Sequence Starts next level sequence  
+\item Start\+Death\+Sequence Starts the death sequence  
+\item Next\+Level\+Sound/\+Death\+Sound  Sound of getting to the next level and destroying the rocket respectively  
+\item Load\+Next\+Level/\+Load\+First\+Level Loads level  
+\end{DoxyItemize}
+
+This class is responsible for background sounds, loading levels.
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_rocket_ad649334ed7f7174780b4b14ae0169639}\label{class_rocket_ad649334ed7f7174780b4b14ae0169639}} 
+\index{Rocket@{Rocket}!ApplyThrust@{ApplyThrust}}
+\index{ApplyThrust@{ApplyThrust}!Rocket@{Rocket}}
+\doxysubsubsection{\texorpdfstring{ApplyThrust()}{ApplyThrust()}}
+{\footnotesize\ttfamily void Rocket.\+Apply\+Thrust (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Regulating accelerating force and thrusting sound. 
+
+\begin{DoxyReturn}{Returns}
+Nothing 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_rocket_a1fb38d84f7ff5f687551521cc8ce5f69}\label{class_rocket_a1fb38d84f7ff5f687551521cc8ce5f69}} 
+\index{Rocket@{Rocket}!DeathSound@{DeathSound}}
+\index{DeathSound@{DeathSound}!Rocket@{Rocket}}
+\doxysubsubsection{\texorpdfstring{DeathSound()}{DeathSound()}}
+{\footnotesize\ttfamily void Rocket.\+Death\+Sound (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Creates the sound after hitting an obstacle 
+
+\mbox{\Hypertarget{class_rocket_a842df217d8ac420ed7943de692160f4b}\label{class_rocket_a842df217d8ac420ed7943de692160f4b}} 
+\index{Rocket@{Rocket}!LoadFirstLevel@{LoadFirstLevel}}
+\index{LoadFirstLevel@{LoadFirstLevel}!Rocket@{Rocket}}
+\doxysubsubsection{\texorpdfstring{LoadFirstLevel()}{LoadFirstLevel()}}
+{\footnotesize\ttfamily void Rocket.\+Load\+First\+Level (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Loads first level. 
+
+\mbox{\Hypertarget{class_rocket_af7aaabc53d26711b09b34a5e7e0d3c79}\label{class_rocket_af7aaabc53d26711b09b34a5e7e0d3c79}} 
+\index{Rocket@{Rocket}!LoadNextLevel@{LoadNextLevel}}
+\index{LoadNextLevel@{LoadNextLevel}!Rocket@{Rocket}}
+\doxysubsubsection{\texorpdfstring{LoadNextLevel()}{LoadNextLevel()}}
+{\footnotesize\ttfamily void Rocket.\+Load\+Next\+Level (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Loads next level. 
+
+\mbox{\Hypertarget{class_rocket_a783bac81d6acc5dd7d162cdf6af790fb}\label{class_rocket_a783bac81d6acc5dd7d162cdf6af790fb}} 
+\index{Rocket@{Rocket}!NextLevelSound@{NextLevelSound}}
+\index{NextLevelSound@{NextLevelSound}!Rocket@{Rocket}}
+\doxysubsubsection{\texorpdfstring{NextLevelSound()}{NextLevelSound()}}
+{\footnotesize\ttfamily void Rocket.\+Next\+Level\+Sound (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Creates the sound after hitting the landing pad. 
+
+\mbox{\Hypertarget{class_rocket_a38e633eea7042b52d62fb1b6a0bc6fcd}\label{class_rocket_a38e633eea7042b52d62fb1b6a0bc6fcd}} 
+\index{Rocket@{Rocket}!OnCollisionEnter@{OnCollisionEnter}}
+\index{OnCollisionEnter@{OnCollisionEnter}!Rocket@{Rocket}}
+\doxysubsubsection{\texorpdfstring{OnCollisionEnter()}{OnCollisionEnter()}}
+{\footnotesize\ttfamily void Rocket.\+On\+Collision\+Enter (\begin{DoxyParamCaption}\item[{Collision}]{collision }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Tracks the incoming collision. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em collision} & Parameter for collision\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_rocket_aba0de43437fc548d36c6782e7bc7f668}\label{class_rocket_aba0de43437fc548d36c6782e7bc7f668}} 
+\index{Rocket@{Rocket}!RespondToRotateInput@{RespondToRotateInput}}
+\index{RespondToRotateInput@{RespondToRotateInput}!Rocket@{Rocket}}
+\doxysubsubsection{\texorpdfstring{RespondToRotateInput()}{RespondToRotateInput()}}
+{\footnotesize\ttfamily void Rocket.\+Respond\+To\+Rotate\+Input (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Determines the button for rotating the rocket and calculating the speed of rotation. 
+
+\begin{DoxyReturn}{Returns}
+Nothing 
+\end{DoxyReturn}
+See \mbox{\hyperlink{class_rocket_a769211265142420d64b503b55b8c96be}{Rocket.\+Respond\+To\+Thrust\+Input}} to get to the acceleration of the rocket. \begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_rocket_ad649334ed7f7174780b4b14ae0169639}{Rocket.\+Apply\+Thrust}}, \mbox{\hyperlink{class_rocket_a38e633eea7042b52d62fb1b6a0bc6fcd}{Rocket.\+On\+Collision\+Enter(\+Collision)}}, \mbox{\hyperlink{class_rocket_a8a289851a2baaa62e08321f845ab3b8b}{Rocket.\+Start\+Nex\+Level\+Sequence}}, \mbox{\hyperlink{class_rocket_aa81a7271065e82ebca87d6596bf57cb2}{Rocket.\+Start\+Death\+Sequence}}
+
+
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_rocket_a769211265142420d64b503b55b8c96be}\label{class_rocket_a769211265142420d64b503b55b8c96be}} 
+\index{Rocket@{Rocket}!RespondToThrustInput@{RespondToThrustInput}}
+\index{RespondToThrustInput@{RespondToThrustInput}!Rocket@{Rocket}}
+\doxysubsubsection{\texorpdfstring{RespondToThrustInput()}{RespondToThrustInput()}}
+{\footnotesize\ttfamily void Rocket.\+Respond\+To\+Thrust\+Input (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Responsible for acceleration of the rocket. Determines the button(\char`\"{}space\char`\"{}) for thrusting 
+
+\begin{DoxyReturn}{Returns}
+Nothing 
+\end{DoxyReturn}
+See \mbox{\hyperlink{class_rocket_aba0de43437fc548d36c6782e7bc7f668}{Rocket.\+Respond\+To\+Rotate\+Input}} to get to the rotation of the rocket. \mbox{\Hypertarget{class_rocket_aa81a7271065e82ebca87d6596bf57cb2}\label{class_rocket_aa81a7271065e82ebca87d6596bf57cb2}} 
+\index{Rocket@{Rocket}!StartDeathSequence@{StartDeathSequence}}
+\index{StartDeathSequence@{StartDeathSequence}!Rocket@{Rocket}}
+\doxysubsubsection{\texorpdfstring{StartDeathSequence()}{StartDeathSequence()}}
+{\footnotesize\ttfamily void Rocket.\+Start\+Death\+Sequence (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Disables moves. Creates an explosion. 
+
+\mbox{\Hypertarget{class_rocket_a8a289851a2baaa62e08321f845ab3b8b}\label{class_rocket_a8a289851a2baaa62e08321f845ab3b8b}} 
+\index{Rocket@{Rocket}!StartNexLevelSequence@{StartNexLevelSequence}}
+\index{StartNexLevelSequence@{StartNexLevelSequence}!Rocket@{Rocket}}
+\doxysubsubsection{\texorpdfstring{StartNexLevelSequence()}{StartNexLevelSequence()}}
+{\footnotesize\ttfamily void Rocket.\+Start\+Nex\+Level\+Sequence (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Begins the loading of the next level. 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Program.\+cs\end{DoxyCompactItemize}
